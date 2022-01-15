@@ -18,8 +18,9 @@ $config = [
         'viewsDir'          => root_path('templates/'),
         'cacheDir'          => root_path('var/cache/'),
         'baseUri'           => env('APP_BASE_URI'),
-        'publicUrl'       => env('APP_PUBLIC_URL'),
-        'sessionDir' => root_path('var/cache/session/'),
+        'publicUrl'         => env('APP_PUBLIC_URL'),
+        'sessionDir'        => root_path('var/cache/session/'),
+        'appSecretKey'      => env('APP_SECRET')
     ],
     'logger'      => [
         'name'     => 'file',

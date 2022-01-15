@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Provider\ConfigProvider;
+use App\Provider\CryptProvider;
 use App\Provider\DatabaseProvider;
 use App\Provider\LoggerProvider;
 use App\Provider\RouterProvider;
@@ -10,7 +11,7 @@ use App\Provider\SessionProvider;
 use App\Provider\UrlProvider;
 use App\Provider\ViewProvider;
 
-return [
+return array(
     ConfigProvider::class,
     RouterProvider::class,
     ViewProvider::class,
@@ -18,5 +19,6 @@ return [
     SessionProvider::class,
     SessionBagProvider::class,
     UrlProvider::class,
-    LoggerProvider::class
-];
+    LoggerProvider::class,
+    CryptProvider::class
+);
