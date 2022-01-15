@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phalcony PHP Framework</title>
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->url->get('img/favicon.ico')?>"/>
+        <?= $this->tag->stylesheetLink('/build/app.css') ?>
+        <link rel="shortcut icon" type="image/x-icon" href="<?= $this->url->get('img/favicon.ico')?>"/>
     </head>
     <body>
         <div class="container">
-            <?php echo $this->getContent(); ?>
+            <?= $this->getContent(); ?>
         </div>
         <?= $this->tag->javascriptInclude('/build/app.js'); ?>
     </body>
