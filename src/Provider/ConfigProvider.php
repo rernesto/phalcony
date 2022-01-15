@@ -26,9 +26,7 @@ class ConfigProvider implements ServiceProviderInterface
         $basePath = $application->getRootPath();
 
         $di->setShared($this->providerName, function () use ($basePath) {
-            $config = include $basePath . '/config/config.php';
-
-            return new Config($config);
+            return $config = include $basePath . '/config/config.php';
         });
     }
 }

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Phalcon\Config;
 use Phalcon\Logger;
 
 $config = [
@@ -40,4 +41,4 @@ if(env('APP_ENV') == 'dev') {
     $config['application']['logLevel'] = Logger::ERROR;
 }
 
-return $config;
+return new Config($config);

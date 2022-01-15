@@ -4,31 +4,35 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Phalcon\Config\ConfigInterface;
-use Phalcon\Crypt\CryptInterface;
-use Phalcon\Db\Adapter\Pdo\AbstractPdo;
 use Phalcon\Mvc\Controller;
-use Phalcon\Mvc\RouterInterface;
-use Phalcon\Session\ManagerInterface as SessionManagerInterface;
+use Phalcon\Mvc\Dispatcher;
 use Psr\Log\LoggerInterface;
 
 /**
  * @property LoggerInterface $logger
  * @property ConfigInterface $config
- * @property AbstractPdo $db
- * @property RouterInterface $router
- * @property SessionManagerInterface $session
- * @property CryptInterface $crypt
  */
 abstract class AbstractController extends Controller
 {
 
-    public function onConstruct()
+    public function initialize()
+    {
+
+    }
+
+    public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
         $this->logger->info(
             sprintf(
-                'Controller `%s` initialized',
-                get_called_class()
+                'Uri mapped to %s::%s',
+                get_class($dispatcher->getActiveController()),
+                $dispatcher->getActiveMethod()
             )
         );
+    }
+
+    public function afterExecuteRoute(Dispatcher $dispatcher)
+    {
+
     }
 }
