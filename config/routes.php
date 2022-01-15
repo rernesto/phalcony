@@ -10,15 +10,15 @@ $defaultNamespace = 'App\Controller';
  */
 $router->add('/:params', [
     'namespace' => $defaultNamespace,
-    'controller' => 'index',
-    'action' => 'index',
+    'controller' => 'home',
+    'action' => 'welcome',
     'params' => 1
 ])->setName('default');
 
 $router->add('/:controller/:params', [
     'namespace' => $defaultNamespace,
     'controller' => 1,
-    'action' => 'index',
+    'action' => 'welcome',
     'params' => 2
 ]);
 
