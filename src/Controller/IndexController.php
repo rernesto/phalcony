@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-class IndexController extends ControllerBase
+namespace App\Controller;
+
+class IndexController extends AbstractController
 {
 
     public function indexAction()
     {
-
     }
 
 }

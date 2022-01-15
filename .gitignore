@@ -1,7 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Phalcon template
-/cache/
 /config/development/
+.env.*
+.phalcon
+/var
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

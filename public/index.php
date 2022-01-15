@@ -1,47 +1,67 @@
 <?php
 declare(strict_types=1);
 
-use Phalcon\Di\FactoryDefault;
+use App\Kernel;
+use Phalcon\Di;
+use Phalcon\Di\DiInterface;
 
 error_reporting(E_ALL);
 
 define('BASE_PATH', dirname(__DIR__));
-define('APP_PATH', BASE_PATH . '/app');
+
+/**
+ * Call Dependency Injection container
+ *
+ * @return mixed|null|DiInterface
+ */
+function container()
+{
+    $default = Di::getDefault();
+    $args    = func_get_args();
+    if (empty($args)) {
+        return $default;
+    }
+
+    return call_user_func_array([$default, 'get'], $args);
+}
+
+/**
+ * Get projects relative root path
+ *
+ * @param string $prefix
+ *
+ * @return string
+ */
+function root_path(string $prefix = ''): string
+{
+    /** @var Kernel $application */
+    $application = container(Kernel::APPLICATION_PROVIDER);
+
+    return join(
+        DIRECTORY_SEPARATOR,
+        [$application->getRootPath(), ltrim($prefix, DIRECTORY_SEPARATOR)]
+    );
+}
+
+/**
+ * @param string $varName
+ * @return mixed
+ */
+function env(string $varName)
+{
+    if(isset($_SERVER[$varName])) {
+        return $_SERVER[$varName];
+    }
+    return null;
+}
 
 try {
-    /**
-     * The FactoryDefault Dependency Injector automatically registers
-     * the services that provide a full stack framework.
-     */
-    $di = new FactoryDefault();
+    require_once BASE_PATH . '/vendor/autoload.php';
 
-    /**
-     * Read services
-     */
-    include APP_PATH . '/config/services.php';
+    Dotenv\Dotenv::createMutable(BASE_PATH)->load();
+    $application = (new Kernel(BASE_PATH))->run();
 
-    /**
-     * Handle routes
-     */
-    include APP_PATH . '/config/router.php';
-
-    /**
-     * Get config service for use in inline setup below
-     */
-    $config = $di->getConfig();
-
-    /**
-     * Include Autoloader
-     */
-    include APP_PATH . '/config/loader.php';
-
-    /**
-     * Handle the request
-     */
-    $application = new \Phalcon\Mvc\Application($di);
-
-    echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
 } catch (\Exception $e) {
-    echo $e->getMessage() . '<br>';
-    echo '<pre>' . $e->getTraceAsString() . '</pre>';
+    echo $e->getMessage(), '<br>';
+    echo nl2br(htmlentities($e->getTraceAsString()));
 }
