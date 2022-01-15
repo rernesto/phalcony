@@ -5,13 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phalcony PHP Framework</title>
-        <?= $this->tag->stylesheetLink('/build/app.css') ?>
-        <link rel="shortcut icon" type="image/x-icon" href="<?= $this->url->get('img/favicon.ico')?>"/>
+        <?= $this->tag->stylesheetLink($this->url->get('build/app.css')) ?>
+        <link rel="shortcut icon" type="image/x-icon" href="<?= $this->url->get('build/assets/images/logo.png')?>"/>
     </head>
     <body>
         <div class="container">
             <?= $this->getContent(); ?>
         </div>
-        <?= $this->tag->javascriptInclude('/build/app.js'); ?>
+        <?= $this->tag->javascriptInclude($this->url->get('build/app.js')); ?>
     </body>
 </html>
