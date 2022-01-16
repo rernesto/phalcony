@@ -5,26 +5,31 @@ use Phalcon\Mvc\Router;
 
 $defaultNamespace = 'App\\Controller';
 
-/**
- * @var Router $router
- */
-$router->add('/:params', [
+$defaultGroup = new Router\Group();
+$defaultGroup->setPrefix('/');
+
+$defaultGroup->add('/:params', [
     'namespace' => $defaultNamespace,
     'controller' => 'home',
     'action' => 'welcome',
     'params' => 1
 ])->setName('default');
 
-$router->add('/:controller/:params', [
+$defaultGroup->add('/:controller/:params', [
     'namespace' => $defaultNamespace,
     'controller' => 1,
     'action' => 'welcome',
     'params' => 2
 ]);
 
-$router->add('/:controller/:action/:params', [
+$defaultGroup->add('/:controller/:action/:params', [
     'namespace' => $defaultNamespace,
     'controller' => 1,
     'action' => 2,
     'params' => 3
 ]);
+
+/**
+ * @var Router $router
+ */
+$router->mount($defaultGroup);
