@@ -7,6 +7,7 @@ use App\Provider\DatabaseProvider;
 use App\Provider\DispatcherProvider;
 use App\Provider\LoggerProvider;
 use App\Provider\RouterProvider;
+use App\Provider\SecurityProvider;
 use App\Provider\SessionBagProvider;
 use App\Provider\SessionProvider;
 use App\Provider\UrlProvider;
@@ -22,5 +23,6 @@ return array(
     SessionBagProvider::class,
     UrlProvider::class,
     LoggerProvider::class,
-    CryptProvider::class
+    CryptProvider::class,
+    SecurityProvider::class
 );
