@@ -12,10 +12,9 @@ $config = [
         'username' => env('DB_USERNAME'),
         'password' => env('DB_PASSWORD'),
         'dbname'   => env('DB_NAME'),
+        'charset'  => env('DB_CHARSET')
     ],
     'application' => [
-        'migrationsDir'     => root_path('migrations/'),
-        'migrationsTsBased' => true,
         'viewsDir'          => root_path('templates/'),
         'cacheDir'          => root_path('var/cache/'),
         'baseUri'           => env('APP_BASE_URI'),

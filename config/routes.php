@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phalcon\Mvc\Router;
 
-$defaultNamespace = 'App\Controller';
+$defaultNamespace = 'App\\Controller';
 
 /**
  * @var Router $router

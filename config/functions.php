@@ -48,6 +48,8 @@ function env(string $varName, ?string $default = null): ?string
 {
     if(isset($_SERVER[$varName])) {
         return $_SERVER[$varName];
+    } elseif(isset($_ENV[$varName])) {
+        return $_ENV[$varName];
     }
     return $default;
 }

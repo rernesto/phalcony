@@ -80,7 +80,7 @@ class DatabaseProvider implements ServiceProviderInterface
         switch ($this->adapters[$name]) {
             case Pdo\Sqlite::class:
                 // Resolve database path
-                $dbConfig = ['dbname' => root_path("var/{$config->get('dbname')}.sqlite3")];
+                $dbConfig = ['dbname' => root_path($config->get('dbname'))];
                 break;
             case Pdo\Postgresql::class:
                 // Postgres does not allow the charset to be changed in the DSN.
