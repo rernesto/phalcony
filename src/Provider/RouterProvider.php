@@ -25,8 +25,9 @@ class RouterProvider implements ServiceProviderInterface
     {
         $application = $di->getShared(Kernel::APPLICATION_PROVIDER);
         $basePath = $application->getRootPath();
+        $routerProvider = $this;
 
-        $di->set($this->providerName, function () use ($basePath) {
+        $di->set($this->providerName, function () use ($basePath, $routerProvider) {
             $router = new Router();
 
             $routes = $basePath . '/config/routes.php';
@@ -37,7 +38,35 @@ class RouterProvider implements ServiceProviderInterface
             /** @noinspection PhpIncludeInspection */
             require_once $routes;
 
+            if (isset($defaultGroup) && isset($defaultNamespace)) {
+                $routerProvider->mountDefaultRoutes($router, $defaultGroup, $defaultNamespace);
+            }
+
             return $router;
         });
+    }
+
+    protected function mountDefaultRoutes(Router $router, Router\Group $defaultGroup, string $defaultNamespace) {
+        $defaultGroup->add('/:params', [
+            'namespace' => $defaultNamespace,
+            'controller' => 'home',
+            'action' => 'welcome',
+            'params' => 1
+        ])->setName('default');
+
+        $defaultGroup->add('/:controller/:params', [
+            'namespace' => $defaultNamespace,
+            'controller' => 1,
+            'action' => 'welcome',
+            'params' => 2
+        ]);
+
+        $defaultGroup->add('/:controller/:action/:params', [
+            'namespace' => $defaultNamespace,
+            'controller' => 1,
+            'action' => 2,
+            'params' => 3
+        ]);
+        $router->mount($defaultGroup);
     }
 }
